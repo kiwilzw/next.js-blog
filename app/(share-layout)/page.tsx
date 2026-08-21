@@ -4,7 +4,6 @@ import { getToken } from "@/lib/auth-server";
 import { Metadata } from "next";
 import { cacheLife, cacheTag } from "next/cache";
 import BlogList from "@/components/web/home/BlogList";
-export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: "博客 | nextjs 16 教程",
   description: "阅读我们的最新文章和见解",
