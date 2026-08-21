@@ -26,8 +26,13 @@ async function getPosts(): Promise<POST[]> {
     'use cache';
     cacheLife("hours");
     cacheTag("posts");
-    const data = await fetchQuery(api.posts.getPosts, {});
-    return data as POST[];
+    try {
+        const data = await fetchQuery(api.posts.getPosts, {});
+        return data as POST[];
+    } catch (e) {
+        console.error("获取文章失败:", e);
+        return []; // ✅ 构建失败时返回空数组，不阻断部署
+    }
 }
 
 export default async function BlogPage() {
