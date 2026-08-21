@@ -42,7 +42,7 @@ export const getPostsByMe = query({
   handler: async (ctx) => {
     const user = await authComponent.safeGetAuthUser(ctx);
     if (!user) {
-      throw new ConvexError("未登录，无法查看自己的文章");
+      return [];  // ✅ 未登录返回空数组，不抛错
     }
     const posts = await ctx.db.query("posts").filter((q) => q.eq(q.field("authorId"), user._id)).order("desc").collect();
     return Promise.all(
