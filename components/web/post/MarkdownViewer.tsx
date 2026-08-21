@@ -10,7 +10,6 @@ type Props = {
 export function MarkdownViewer({ content }: Props) {
   return (
     <div className="prose max-w-none">
-        {JSON.stringify(content)}
       <ReactMarkdown rehypePlugins={[[rehypeHighlight, { detect: true }]]}>
         {content}
       </ReactMarkdown>
