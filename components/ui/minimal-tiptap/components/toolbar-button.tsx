@@ -1,5 +1,4 @@
 import * as React from "react"
-// import type { TooltipContentProps } from "@radix-ui/react-tooltip"
 import {
   Tooltip,
   TooltipContent,
@@ -7,8 +6,12 @@ import {
 } from "@/components/ui/tooltip"
 import { Toggle } from "@/components/ui/toggle"
 import { cn } from "@/lib/utils"
-// 不要import类型！原地从组件实例推导
-type TooltipContentProps = React.ComponentPropsWithoutRef<typeof TooltipContent>
+
+// 手动定义onPointerDownOutside类型，不导入radix
+type TooltipContentProps = React.ComponentPropsWithoutRef<typeof TooltipContent> & {
+  onPointerDownOutside?: (e: React.PointerEvent<HTMLElement>) => void
+}
+
 interface ToolbarButtonProps extends React.ComponentProps<typeof Toggle> {
   isActive?: boolean
   tooltip?: string
@@ -35,7 +38,7 @@ export const ToolbarButton = ({
 
   return (
     <Tooltip>
-       <TooltipTrigger render={toggleButton} />
+      <TooltipTrigger render={toggleButton} />
       <TooltipContent {...tooltipOptions}>
         <div className="flex flex-col items-center text-center">{tooltip}</div>
       </TooltipContent>
@@ -44,5 +47,4 @@ export const ToolbarButton = ({
 }
 
 ToolbarButton.displayName = "ToolbarButton"
-
 export default ToolbarButton
