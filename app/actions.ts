@@ -36,14 +36,14 @@ export async function createBlogAction(values: z.infer<typeof postSchema>) {
             imageStorageId: storageId,
             describe:parsed.data.describe ?? ""
         }, { token });
-
+        updateTag("posts");
+        updateTag("MyPosts");
+        redirect("/blog");
     } catch (e) {
         return {
             error: "Failed to create post"
         };
     }
-    updateTag("posts");
-    return redirect("/blog");
 }
 
 export async function getPostsAction() {

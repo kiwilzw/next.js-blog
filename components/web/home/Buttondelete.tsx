@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button"
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-import { fetchMutation } from "convex/nextjs";
 import { useMutation } from "convex/react";
 import { Loader2 } from "lucide-react";
 import { updateTag } from "next/cache";
