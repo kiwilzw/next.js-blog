@@ -4,7 +4,7 @@ import { postSchema } from "./schemas/blog";
 import { api } from "@/convex/_generated/api";
 import { redirect } from "next/navigation";
 import { getToken } from "@/lib/auth-server";
-import { fetchAction, fetchMutation, fetchQuery, preloadQuery } from "convex/nextjs";
+import { fetchMutation, fetchQuery } from "convex/nextjs";
 import { updateTag } from "next/cache";
 // import { getImageUrlAction } from "@/convex/posts";
 
@@ -34,16 +34,15 @@ export async function createBlogAction(values: z.infer<typeof postSchema>) {
             body: parsed.data.content,
             title: parsed.data.title,
             imageStorageId: storageId,
-            describe:parsed.data.describe ?? ""
+            describe: parsed.data.describe ?? ""
         }, { token });
-        updateTag("posts");
-        updateTag("MyPosts");
-        redirect("/blog");
     } catch (e) {
         return {
             error: "Failed to create post"
         };
     }
+    updateTag("posts");
+    redirect("/blog");
 }
 
 export async function getPostsAction() {

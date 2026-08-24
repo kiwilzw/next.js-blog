@@ -35,11 +35,7 @@ export default function CreateRoute() {
         
         return imageUrl ?? ""
     };
-    // const onImageRemove = async (url: string) => {
-    //     console.log("url",url)
-    // }
     function onSubmit(values: z.infer<typeof postSchema>) {
-        console.log(JSON.stringify(values, null, 2))
         startTransition(async () => {
             await createBlogAction(values);
         });

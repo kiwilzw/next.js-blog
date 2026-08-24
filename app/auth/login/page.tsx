@@ -18,7 +18,7 @@ import Link from "next/link";
 
 export default function LoginPage() {
     const router = useRouter();
-    const [isPending, startTransition ] = useTransition();
+    const [isPending, startTransition] = useTransition();
     const form = useForm({
         resolver: zodResolver(loginSchema),
         defaultValues: {
@@ -28,10 +28,12 @@ export default function LoginPage() {
     });
     function onSubmit(data: z.infer<typeof loginSchema>) {
         startTransition(async () => {
-            await authClient.signIn.email({
-                email: data.email,
-                password: data.password,
-                fetchOptions: {
+            await authClient.signIn.email(
+                {
+                    email: data.email,
+                    password: data.password,
+                },
+                {
                     onSuccess: () => {
                         toast.success("登录成功");
                         router.push("/");
@@ -40,7 +42,7 @@ export default function LoginPage() {
                         toast.error("登录失败");
                     }
                 }
-            })
+            )
         })
 
     }
@@ -78,13 +80,13 @@ export default function LoginPage() {
                             )}
                         />
                         <Button type="submit" disabled={isPending} variant="secondary">{
-                                isPending ? 
+                            isPending ?
                                 (<>
-                                  <Loader2 className="animate-spin size-4" />
-                                  <span>登录中...</span>
+                                    <Loader2 className="animate-spin size-4" />
+                                    <span>登录中...</span>
                                 </>) :
                                 <span>登录</span>
-                            }</Button>
+                        }</Button>
                         <Button variant="secondary" onClick={() => router.push("/auth/sign-up")} className="w-full cursor-pointer">
                             <Link href="/auth/sign-up">
                                 去注册

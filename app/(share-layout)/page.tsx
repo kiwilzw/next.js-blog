@@ -1,6 +1,6 @@
 import { api } from "@/convex/_generated/api";
 import { preloadQuery } from "convex/nextjs";
-import { getToken } from "@/lib/auth-server";
+import { getToken, preloadAuthQuery } from "@/lib/auth-server";
 import { Metadata } from "next";
 import { cacheLife, cacheTag } from "next/cache";
 import BlogList from "@/components/web/home/BlogList";
@@ -12,10 +12,7 @@ export const metadata: Metadata = {
 
 // 数据获取函数，缓存指令写在这里
 async function getMyPosts(token: string | undefined) {
-  'use cache';
-  cacheLife("minutes");
-  cacheTag("MyPosts");
-  const preloadedData = await preloadQuery(api.posts.getPostsByMe, {}, { token });
+  const preloadedData = await preloadAuthQuery(api.posts.getPostsByMe);
   return preloadedData;
 }
 

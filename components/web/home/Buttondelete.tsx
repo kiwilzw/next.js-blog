@@ -4,7 +4,6 @@ import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { useMutation } from "convex/react";
 import { Loader2 } from "lucide-react";
-import { updateTag } from "next/cache";
 import { useTransition } from "react";
 
 interface POST {
@@ -23,7 +22,6 @@ export function Buttondelete({ postId, token }: { postId: Id<"posts">; token: st
   function handleDeletePost() {
     startTransition(async () => {
       await deletePostMutation({ postId });
-      updateTag("MyPosts")
     })
   }
   return (
