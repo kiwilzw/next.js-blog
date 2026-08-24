@@ -18,7 +18,7 @@ import { MarkdownViewer } from "@/components/web/post/MarkdownViewer";
 interface PostIdRouteProps {
     params: Promise<{ postId: Id<"posts"> }>
 }
-
+export const instant = false;
 export async function generateMetadata({ params }: PostIdRouteProps): Promise<Metadata> {
     const { postId } = await params;
     const post = await fetchQuery(api.posts.getPostById, { postId });
