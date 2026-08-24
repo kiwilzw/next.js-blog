@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   // 生产环境 HTTPS 下，better-auth 会加 __Secure- 前缀
   const sessionCookie = 
     request.cookies.get("__Secure-better-auth.session_token")?.value ||
