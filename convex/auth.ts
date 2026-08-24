@@ -25,6 +25,10 @@ export const createAuth = (ctx: GenericCtx<DataModel>) => {
       // The Convex plugin is required for Convex compatibility
       convex({ authConfig }) as any,
     ],
+    trustedOrigins: [
+      "https://kiwilzw-nextjs-blog-m2kl.vercel.app",
+      "https://dashing-bunny-c18f9a.netlify.app"
+    ]
   })
 }
 
