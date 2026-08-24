@@ -41,7 +41,6 @@ export async function createBlogAction(values: z.infer<typeof postSchema>) {
             error: "Failed to create post"
         };
     }
-    updateTag("posts");
     redirect("/blog");
 }
 

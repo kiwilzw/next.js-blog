@@ -7,7 +7,7 @@ import Image from "next/image"
 import Link from "next/link";
 import { Buttondelete } from "./Buttondelete";
 
-export default function BlogList({ preloadedData, token }: { preloadedData: Preloaded<typeof api.posts.getPostsByMe>, token: string | undefined }) {
+export default function BlogList({ preloadedData }: { preloadedData: Preloaded<typeof api.posts.getPostsByMe> }) {
     
     const data = usePreloadedQuery(preloadedData);
     return (
@@ -36,7 +36,7 @@ export default function BlogList({ preloadedData, token }: { preloadedData: Prel
                         })} href={`/blog/${post._id}`}>
                             阅读更多
                         </Link>
-                        <Buttondelete postId={post._id} token={token} />
+                        <Buttondelete postId={post._id}/>
                     </CardFooter>
                 </Card>
             ))}

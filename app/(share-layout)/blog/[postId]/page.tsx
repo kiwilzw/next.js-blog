@@ -38,10 +38,6 @@ export async function generateMetadata({ params }: PostIdRouteProps): Promise<Me
 }
 // page.tsx｜Server Component
 async function loadPostData(postId: Id<"posts">, token: string | undefined) {
-    'use cache'
-    cacheLife("minutes");
-    cacheTag("posts");
-
     const [post, preloadComments, userId] = await Promise.all([
         fetchQuery(api.posts.getPostById, { postId }),
         preloadQuery(api.comments.getCommentsByPostId, { postId }),

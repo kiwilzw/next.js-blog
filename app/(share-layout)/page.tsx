@@ -26,7 +26,7 @@ export default async function Home() {
         <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">你的博客</h1>
         <p className="pt-4 max-w-2xl mx-auto text-xl text-muted-foreground">来自你的见解、想法和趋势!</p>
       </div>
-      <BlogList preloadedData={preloadedData} token={token} />
+      <BlogList preloadedData={preloadedData} />
     </div>
   );
 }
