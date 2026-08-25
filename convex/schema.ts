@@ -11,6 +11,8 @@ export default defineSchema({
         searchField:'title'
     }).searchIndex("search_body",{
         searchField:'body'
+    }).searchIndex("search_describe",{
+        searchField:'describe'
     }),
     comments:defineTable({
         postId: v.id("posts"),

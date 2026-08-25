@@ -13,8 +13,13 @@ import { useRouter } from "next/navigation";
 import { createBlogAction, uploaderAction, 
     // uploaderAction
  } from "@/app/actions";
-import { MinimalTiptapEditor } from "@/components/ui/minimal-tiptap";
+// import { MinimalTiptapEditor } from "@/components/ui/minimal-tiptap";
 import { Content } from "@tiptap/react";
+import dynamic from "next/dynamic";
+const MinimalTiptapEditor = dynamic(() => import("@/components/ui/minimal-tiptap").then(mod=> mod.MinimalTiptapEditor),{
+    ssr: false,
+    loading: () => <div className="h-64 animate-pulse bg-muted rounded-md" />,
+})
 export default function CreateRoute() {
     const [isPending, startTransition] = useTransition();
     const [value, setValue] = useState<Content>("")
@@ -30,7 +35,6 @@ export default function CreateRoute() {
     });
     
     const uploader = async (file: File) => {
-        console.log("触发uploader", file);
         const imageUrl =await uploaderAction(file)
         
         return imageUrl ?? ""
@@ -73,7 +77,7 @@ export default function CreateRoute() {
                                 render={({ field, fieldState }) => (
                                     <Field>
                                         <FieldLabel>描述</FieldLabel>
-                                        <Input required aria-invalid={fieldState.invalid} placeholder="请简单描述一下" {...field} />
+                                        <Input aria-invalid={fieldState.invalid} placeholder="请简单描述一下" {...field} />
                                         {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                                     </Field>
                                 )}
@@ -99,10 +103,6 @@ export default function CreateRoute() {
                                             editable={true}
                                             editorClassName="focus:outline-hidden"
                                             uploader={uploader}
-                                            onPaste={(e,slice) => {
-                                                console.log("e触发onPaste", e);
-                                                console.log("slice触发onPaste", slice);
-                                            }}
                                         />
                                         {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                                     </Field>

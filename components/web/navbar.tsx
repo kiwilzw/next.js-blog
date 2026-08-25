@@ -16,8 +16,8 @@ export function Navbar() {
             <div className="flex items-center gap-8">
                 <Link href="/">
                     <h1 className="text-3xl font-bold">
-                        Next
-                        <span className="text-primary ">Pro</span>
+                        全栈博客
+                        <span className="text-primary ">平台</span>
                     </h1>
                 </Link>
                 <div className="flex items-center gap-2">

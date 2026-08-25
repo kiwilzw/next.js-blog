@@ -119,7 +119,7 @@ export const searchPost = query({
     const titleDocs = await ctx.db.query("posts").withSearchIndex("search_title", (q) => q.search('title', args.term)).take(limit);
     pushDocs(titleDocs);  
     if (results.length < limit) {
-      const bodyDocs = await ctx.db.query("posts").withSearchIndex("search_body", (q) => q.search('body', args.term)).take(limit);
+      const bodyDocs = await ctx.db.query("posts").withSearchIndex("search_describe", (q) => q.search('describe', args.term)).take(limit);
       pushDocs(bodyDocs);
     }
     return results;

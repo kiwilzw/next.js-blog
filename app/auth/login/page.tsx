@@ -36,7 +36,7 @@ export default function LoginPage() {
                 {
                     onSuccess: () => {
                         toast.success("登录成功");
-                        router.push("/");
+                        window.location.assign("/");
                     },
                     onError: () => {
                         toast.error("登录失败");

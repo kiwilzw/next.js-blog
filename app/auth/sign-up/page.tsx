@@ -35,7 +35,7 @@ export default function SignUpPage() {
                 {
                     onSuccess: () => {
                         toast.success("注册成功");
-                        router.push("/");
+                        window.location.assign("/");
                     },
                     onError: () => {
                         toast.error("注册失败");
